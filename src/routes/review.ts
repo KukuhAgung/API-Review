@@ -1,17 +1,12 @@
 import { Router, Request, Response, NextFunction } from 'express'
-
+import { logger } from '../utils/logger'
 export const ReviewRouter: Router = Router()
 
 ReviewRouter.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).send({
-    status: true,
-    statusCode: 200,
-    data: [
-      {
-        name: 'Andi Yanto',
-        rating: 4.5,
-        comment: 'Di jamin bersih, kinclong'
-      }
-    ]
-  })
+  logger.info('Get Reviews')
+  res.status(200).send({ status: 'OK' })
+})
+ReviewRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
+  logger.info('Post Review')
+  res.status(200).send({ status: true, statuscode: 200, data: req.body })
 })

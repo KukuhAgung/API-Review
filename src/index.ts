@@ -1,11 +1,25 @@
-import express, { Application } from 'express'
+import bodyParser from 'body-parser'
+import express, { Application, Request, Response, NextFunction } from 'express'
 import { routes } from './routes'
+import { logger } from './utils/logger'
+import cors from 'cors'
 
 const app: Application = express()
 const port: number = 4000
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+app.use(cors())
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', '*')
+  res.setHeader('Access-Control-Allow-Headers', '*')
+  next()
+})
+
 routes(app)
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`)
+  logger.info(`Server is running at http://localhost:${port}`)
 })
