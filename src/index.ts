@@ -1,5 +1,5 @@
 import bodyParser from 'body-parser'
-import express, { Application, Request, Response, NextFunction } from 'express'
+import express, { Application } from 'express'
 import { routes } from './routes'
 import { logger } from './utils/logger'
 import cors from 'cors'
@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use(cors())
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', '*')
   res.setHeader('Access-Control-Allow-Headers', '*')

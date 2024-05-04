@@ -1,11 +1,11 @@
 import { Application, Router } from 'express'
-import { ReviewRouter } from './review'
+import { ReviewRouter } from './review.route'
 
-const _routes: Array<[string, Router]> = [["'/review'", ReviewRouter]]
+const _routes: Array<[string, Router]> = [['/review', ReviewRouter]]
 
 export const routes = (app: Application) => {
   _routes.forEach((route) => {
-    const [path, router] = route
-    app.use(path, router)
+    const [url, router] = route
+    app.use(url, router)
   })
 }
